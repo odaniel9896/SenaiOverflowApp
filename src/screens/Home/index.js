@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { api } from "../../services/api";
-import { StatusBar, FlatList } from "react-native";
-import { Container, ToolBar, TextToolBar } from "./styles";
-import colors from "../../styles/colors";
+import React, { useEffect, useState } from "react";
+import { Text, View, StatusBar, FlatList } from "react-native";
 import CardQuestion from "../../components/CardQuestion";
-import { iconeSair } from "react-native-vector-icons/FontAwesome";
+import { api } from "../../services/api";
+import colors from "../../styles/colors";
+import { Container, TextToolBar, ToolBar } from "./styles";
 
 function Home() {
   StatusBar.setBackgroundColor(colors.primary);
@@ -15,6 +14,8 @@ function Home() {
   const [page, setPage] = useState(1);
 
   const loadQuestions = async (reload) => {
+    console.log("Buscando novas perguntas");
+
     //se já tiver buscando, não busca de novo
     if (isLoadingFeed) return;
 
@@ -46,14 +47,14 @@ function Home() {
     <Container>
       <ToolBar>
         <TextToolBar>SENAI OVERFLOW</TextToolBar>
-        <ToolBarIcon src={iconeSair} />
       </ToolBar>
       <FlatList
         data={questions}
         style={{ width: "100%" }}
-        onEndReachedThreshold={() => loadQuestions()}
+        onEndReached={() => loadQuestions()}
+        onEndReachedThreshold={0.2}
         keyExtractor={(question) => String(question.id)}
-        renderItem={({ item: question }) => (
+        renderItem={({item: question}) => (
           <CardQuestion question={question} />
         )}
       />

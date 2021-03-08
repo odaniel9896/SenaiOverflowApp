@@ -30,12 +30,12 @@ function CardAnswer({ answer }) {
           }
         />
         <HeaderContent>
-          <TextPoster>por Fulano</TextPoster>
-          <TextDate>em 20/20/2020 às 10:10</TextDate>
+          <TextPoster>por {answer.Student.name}</TextPoster>
+          <TextDate>em {answer.created_at}</TextDate>
         </HeaderContent>
       </CardHeader>
       <CardBody>
-        <TextDescription>Essa é a descrição da reposta</TextDescription>
+        <TextDescription>{answer.description}</TextDescription>
       </CardBody>
     </ContainerAnswer>
   );
@@ -56,23 +56,25 @@ function CardQuestion({ question }) {
         />
         <HeaderContent>
           <TextPoster>por {question.Student.name}</TextPoster>
-          <TextDate>em {question.Student.created_at}</TextDate>
+          <TextDate>em {question.created_at}</TextDate>
         </HeaderContent>
       </CardHeader>
       <CardBody>
         <TextTitle>{question.title}</TextTitle>
         <TextDescription>{question.description}</TextDescription>
-
-        <ImageQuestion
-          source={question.image ? { uri: question.image } : fotoPerfil}
-        />
+        {question.image && (
+          <ImageQuestion
+            style={{ resizeMode: "contain" }}
+            source={{ uri: question.image }}
+          />
+        )}
       </CardBody>
       <CardFooter>
         <TouchableOpacity onPress={() => setShowAnswers(!showAnswers)}>
           <TextPoster>
             {question.Answers.length === 0
               ? "Seja o primeiro a responder"
-              : question.Answers.length + "respostas"}
+              : question.Answers.length + " respostas"}
           </TextPoster>
         </TouchableOpacity>
         {showAnswers && question.Answers.length > 0 && (
@@ -82,6 +84,7 @@ function CardQuestion({ question }) {
             renderItem={({ item: answer }) => <CardAnswer answer={answer} />}
           />
         )}
+
         <ContainerInputAnswer>
           <InputAnswer
             placeholder="Responda a essa pergunta"
@@ -93,4 +96,5 @@ function CardQuestion({ question }) {
     </Container>
   );
 }
+
 export default CardQuestion;
