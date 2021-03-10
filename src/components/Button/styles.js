@@ -4,7 +4,7 @@ import colors from "../../styles/colors";
 export const Container = styled.TouchableOpacity`
   border-radius: 4px;
   border-width: 2px;
-  border-color: ${colors.light};
+  border-color: ${({disable}) => disabled ? colors.darkGray : colors.light};
   padding: 10px;
 `;
 

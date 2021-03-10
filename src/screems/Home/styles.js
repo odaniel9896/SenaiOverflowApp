@@ -29,3 +29,10 @@ export const TextToolBar = styled(TextDefault)`
   font-weight: bold;
   text-align: center;
 `;
+
+export const IconSignOut = styled(Icon)`
+font-size: 24px;
+color: ${colors.dark};
+right: 4px;
+position: absolute;
+`;
