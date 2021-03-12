@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState} from "react";
 import { Content, TextInputLogin, Label } from "./styles";
 import { Container, ToolBar, TextToolBar } from "../../styles/stylesGlobal";
 import { Alert, StatusBar, TouchableOpacity } from "react-native";
 import colors from "../../styles/colors";
 import Button from "../../components/Button";
 import { api } from "../../services/api";
+import { signIn } from "../../services/security";
 
 function Login({ navigation }) {
 	StatusBar.setBackgroundColor(colors.primary);

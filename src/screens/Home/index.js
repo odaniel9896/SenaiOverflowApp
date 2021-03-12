@@ -12,6 +12,7 @@ import {
 import colors from "../../styles/colors";
 import CardQuestion from "../../components/CardQuestion";
 import imgLogo from "../../../assets/logo.png";
+import { signOut } from "../../services/security";
 
 function Home({ navigation }) {
 	StatusBar.setBackgroundColor(colors.primary);
