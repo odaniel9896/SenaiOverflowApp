@@ -14,6 +14,8 @@ function Login({ navigation }) {
 		password: "",
 	});
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const handleEmail = (e) => {
 		setLogin({ ...login, email: e });
 	};
@@ -24,12 +26,17 @@ function Login({ navigation }) {
 
 	const handleSubmit = async () => {
 		try {
+			setIsLoading(true);
+
 			const response = await api.post("/sessions", login);
 
 			signIn(response.data);
 
+			setIsLoading(false);
+
 			navigation.navigate("Home");
 		} catch (error) {
+			setIsLoading(false);
 			console.log(error);
 			if (error.response) {
 				Alert.alert("Ops", error.response.data.error);
@@ -60,8 +67,8 @@ function Login({ navigation }) {
 				/>
 				<Button
 					handlePress={handleSubmit}
-					text="Entrar"
-					disabled={login.email === "" || login.password === ""}
+					text={isLoading ? "Verificando..." : "Entrar"}
+					disabled={isLoading || login.email === "" || login.password === ""}
 					style={{ width: "96%" }}
 				/>
 			</Content>

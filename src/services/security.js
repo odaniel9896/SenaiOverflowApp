@@ -1,4 +1,3 @@
-import jwtDecode from "jwt-decode";
 import { api } from "./api";
 import AsyncStorage from "@react-native-community/async-storage";
 
